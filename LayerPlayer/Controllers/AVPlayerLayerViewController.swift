@@ -94,6 +94,15 @@ extension AVPlayerLayerViewController {
 // MARK: - Triggered actions
 extension AVPlayerLayerViewController {
   @objc func playerDidReachEndNotificationHandler(_ notification: Notification) {
+    //notification
+    guard  let playerItem = notification.object as? AVPlayerItem else { return   }
+  
+    playerItem.seek(to: .zero, completionHandler: nil)
+    
+    if player?.actionAtItemEnd == .pause {
+      player?.pause()
+      updatePlayButtonTitle(isPlaying: false)
+    }
   }
 }
 
