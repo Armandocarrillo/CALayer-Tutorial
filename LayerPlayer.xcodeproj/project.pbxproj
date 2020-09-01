@@ -126,11 +126,11 @@
 		D24791111A36BB95007AC991 /* LayerPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				D24791341A36BC39007AC991 /* Controllers */,
 				D24791131A36BB95007AC991 /* Info.plist */,
 				D24791361A36BC4B007AC991 /* Models */,
-				D24791351A36BC42007AC991 /* Views */,
-				D24791341A36BC39007AC991 /* Controllers */,
 				D24791121A36BB95007AC991 /* Supporting Files */,
+				D24791351A36BC42007AC991 /* Views */,
 			);
 			path = LayerPlayer;
 			sourceTree = "<group>";
@@ -151,18 +151,18 @@
 			isa = PBXGroup;
 			children = (
 				D24791371A36BC6C007AC991 /* AppDelegate.swift */,
-				D24791401A36BC80007AC991 /* ClassListViewController.swift */,
-				D24791411A36BC80007AC991 /* CALayerViewController.swift */,
-				D24791421A36BC80007AC991 /* CALayerControlsViewController.swift */,
-				D24791441A36BC80007AC991 /* CAScrollLayerViewController.swift */,
-				D24791451A36BC80007AC991 /* CATextLayerViewController.swift */,
 				D24791431A36BC80007AC991 /* AVPlayerLayerViewController.swift */,
-				D24791461A36BC80007AC991 /* CAGradientLayerViewController.swift */,
-				D24791471A36BC80007AC991 /* CAReplicatorLayerViewController.swift */,
-				D24791481A36BC80007AC991 /* CAShapeLayerViewController.swift */,
-				D247914D1A36BC80007AC991 /* CATransformLayerViewController.swift */,
-				D247914E1A36BC80007AC991 /* CAEmitterLayerViewController.swift */,
 				D247914F1A36BC80007AC991 /* CAEmitterLayerControlsViewController.swift */,
+				D247914E1A36BC80007AC991 /* CAEmitterLayerViewController.swift */,
+				D24791461A36BC80007AC991 /* CAGradientLayerViewController.swift */,
+				D24791421A36BC80007AC991 /* CALayerControlsViewController.swift */,
+				D24791411A36BC80007AC991 /* CALayerViewController.swift */,
+				D24791471A36BC80007AC991 /* CAReplicatorLayerViewController.swift */,
+				D24791441A36BC80007AC991 /* CAScrollLayerViewController.swift */,
+				D24791481A36BC80007AC991 /* CAShapeLayerViewController.swift */,
+				D24791451A36BC80007AC991 /* CATextLayerViewController.swift */,
+				D247914D1A36BC80007AC991 /* CATransformLayerViewController.swift */,
+				D24791401A36BC80007AC991 /* ClassListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
