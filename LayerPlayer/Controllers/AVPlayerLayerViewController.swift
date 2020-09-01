@@ -64,6 +64,13 @@ extension AVPlayerLayerViewController {
 // MARK: - IBActions
 extension AVPlayerLayerViewController {
   @IBAction func playButtonTapped(_ sender: UIButton) {
+    if player?.rate == 0 {
+      player?.rate = rate
+      updatePlayButtonTitle(isPlaying: true)
+    } else {
+      player?.pause()
+      updatePlayButtonTitle(isPlaying: false)
+    }
   }
 
   @IBAction func rateSegmentedControlChanged(_ sender: UISegmentedControl) {
