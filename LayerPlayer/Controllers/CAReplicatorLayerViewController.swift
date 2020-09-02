@@ -1,30 +1,4 @@
-/// Copyright (c) 2020 Razeware LLC
-///
-/// Permission is hereby granted, free of charge, to any person obtaining a copy
-/// of this software and associated documentation files (the "Software"), to deal
-/// in the Software without restriction, including without limitation the rights
-/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-/// copies of the Software, and to permit persons to whom the Software is
-/// furnished to do so, subject to the following conditions:
-///
-/// The above copyright notice and this permission notice shall be included in
-/// all copies or substantial portions of the Software.
-///
-/// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
-/// distribute, sublicense, create a derivative work, and/or sell copies of the
-/// Software in any work that is designed, intended, or marketed for pedagogical or
-/// instructional purposes related to programming, coding, application development,
-/// or information technology.  Permission for such use, copying, modification,
-/// merger, publication, distribution, sublicensing, creation of derivative works,
-/// or sale is expressly withheld.
-///
-/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-/// THE SOFTWARE.
+
 
 import UIKit
 
@@ -67,12 +41,45 @@ class CAReplicatorLayerViewController: UIViewController {
 // MARK: - Layer setup
 extension CAReplicatorLayerViewController {
   func setUpReplicatorLayer() {
+    
+    replicatorLayer.frame = viewForReplicatorLayer.bounds
+    //to set the number of replications
+    let count = instanceCountSlider.value
+    replicatorLayer.instanceCount = Int(count)
+    replicatorLayer.instanceDelay = CFTimeInterval(instanceCountSlider.value / count )
+    //to define the base color for all replicated instance
+    replicatorLayer.instanceColor = UIColor.white.cgColor
+    replicatorLayer.instanceRedOffset = offsetValueForSwitch(offsetRedSwitch)
+    replicatorLayer.instanceGreenOffset = offsetValueForSwitch(offsetGreenSwitch)
+    replicatorLayer.instanceBlueOffset = offsetValueForSwitch(offsetBlueSwitch)
+    replicatorLayer.instanceAlphaOffset = offsetValueForSwitch(offsetAlphaSwitch)
+    //to rotate instance "circle effect"
+    let angle = Float.pi * 2.0 / count
+    replicatorLayer.instanceTransform = CATransform3DMakeRotation(CGFloat(angle), 0.0, 0.0, 1.0)
+    //to add layer to the view s layer
+    viewForReplicatorLayer.layer.addSublayer(replicatorLayer)
   }
 
   func setUpInstanceLayer() {
+    //sets the instance frame
+    let layerWidth = CGFloat(layerSizeSlider.value)
+    let midX = viewForReplicatorLayer.bounds.midX - layerWidth / 2.0
+    instanceLayer.frame = CGRect(
+      x: midX,
+      y: 0.0,
+      width: layerWidth,
+      height: layerWidth * lengthMultiplier )
+    instanceLayer.backgroundColor = UIColor.white.cgColor
+    replicatorLayer.addSublayer(instanceLayer)
+    
   }
 
   func setUpLayerFadeAnimation() {
+    
+    //fade animation
+    fadeAnimation.fromValue = 1.0
+    fadeAnimation.toValue = 0.0
+    fadeAnimation.repeatCount = Float(Int.max)
   }
 }
 
