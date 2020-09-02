@@ -58,9 +58,34 @@ class CAShapeLayerViewController: UIViewController {
 // MARK: - Layer setup
 extension CAShapeLayerViewController {
   func setUpPath() {
+    
+    openPath.move(to: CGPoint(x: 30, y: 196))
+    
+    openPath.addCurve(to: CGPoint(x: 112.0, y: 12.5), controlPoint1: CGPoint(x: 110.56, y: 13.79), controlPoint2: CGPoint(x: 112.07, y: 13.01))
+    
+    openPath.addCurve(to: CGPoint(x: 194, y: 196), controlPoint1: CGPoint(x: 111.9, y: 11.81), controlPoint2: CGPoint(x: 194, y: 196))
+    
+    openPath.addLine(to: CGPoint(x: 30.0, y: 85.68))
+    openPath.addLine(to: CGPoint(x: 194.0, y: 48.91))
+    openPath.addLine(to: CGPoint(x: 30, y: 196))
   }
 
   func setUpShapeLayer() {
+    //to take a path to defines how to draw it on the screen
+    shapeLayer.path = openPath.cgPath
+    //lines in the path intersect and end
+    shapeLayer.lineCap = .butt
+    shapeLayer.lineJoin = .miter
+    shapeLayer.miterLimit = 4.0
+    
+    shapeLayer.lineWidth = CGFloat(lineWidthSlider.value)
+    shapeLayer.strokeColor = swiftOrangeColor.cgColor
+    shapeLayer.fillColor = UIColor.white.cgColor
+    
+    shapeLayer.lineDashPattern = nil
+    shapeLayer.lineDashPhase = 0.0
+    
+    viewForShapeLayer.layer.addSublayer(shapeLayer)
   }
 }
 
