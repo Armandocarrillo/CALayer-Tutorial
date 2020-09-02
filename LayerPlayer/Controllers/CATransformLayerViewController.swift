@@ -1,30 +1,3 @@
-/// Copyright (c) 2020 Razeware LLC
-///
-/// Permission is hereby granted, free of charge, to any person obtaining a copy
-/// of this software and associated documentation files (the "Software"), to deal
-/// in the Software without restriction, including without limitation the rights
-/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-/// copies of the Software, and to permit persons to whom the Software is
-/// furnished to do so, subject to the following conditions:
-///
-/// The above copyright notice and this permission notice shall be included in
-/// all copies or substantial portions of the Software.
-///
-/// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
-/// distribute, sublicense, create a derivative work, and/or sell copies of the
-/// Software in any work that is designed, intended, or marketed for pedagogical or
-/// instructional purposes related to programming, coding, application development,
-/// or information technology.  Permission for such use, copying, modification,
-/// merger, publication, distribution, sublicensing, creation of derivative works,
-/// or sale is expressly withheld.
-///
-/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-/// THE SOFTWARE.
 
 import UIKit
 
@@ -69,6 +42,67 @@ class CATransformLayerViewController: UIViewController {
 // MARK: - Layer setup
 extension CATransformLayerViewController {
   func buildCube() {
+    //to create a trandformerLayer
+    transformLayer = CATransformLayer()
+    
+    // add CALayer to represent red side
+    let redLayer = sideLayer(color: redColor)
+    redLayer.addSublayer(swipeMeTextLayer)
+    transformLayer.addSublayer(redLayer)
+    
+    // add the orange side of the cube
+    let orangeLayer = sideLayer(color: orangeColor)
+    var orangeTransform = CATransform3DMakeTranslation(sideLength / 2.0, 0.0, sideLength / -2.0)
+    orangeTransform = CATransform3DRotate(orangeTransform, degreesToRadians(90.0), 0.0, 1.0, 0.0)
+    orangeLayer.transform = orangeTransform
+    transformLayer.addSublayer(orangeLayer)
+    
+    let yellowLayer = sideLayer(color: yellowColor)
+    yellowLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, -sideLength)
+    transformLayer.addSublayer(yellowLayer)
+    // to create the remainig four sides of your cube
+    let greenLayer = sideLayer(color: greenColor)
+    var greenTransform = CATransform3DMakeTranslation(sideLength / -2.0,  0.0, sideLength / -2.0)
+    greenTransform = CATransform3DRotate( greenTransform,
+      degreesToRadians(90.0),
+      0.0,
+      1.0,
+      0.0)
+    greenLayer.transform = greenTransform
+    transformLayer.addSublayer(greenLayer)
+            
+    let blueLayer = sideLayer(color: blueColor)
+    var blueTransform = CATransform3DMakeTranslation(
+      0.0,
+      sideLength / -2.0,
+      sideLength / -2.0)
+    blueTransform = CATransform3DRotate(
+      blueTransform,
+      degreesToRadians(90.0),
+      1.0,
+      0.0,
+      0.0)
+    blueLayer.transform = blueTransform
+    transformLayer.addSublayer(blueLayer)
+            
+    let purpleLayer = sideLayer(color: purpleColor)
+    var purpleTransform = CATransform3DMakeTranslation(
+      0.0,
+      sideLength / 2.0,
+      sideLength / -2.0)
+    purpleTransform = CATransform3DRotate(
+      purpleTransform,
+      degreesToRadians(90.0),
+      1.0,
+      0.0,
+      0.0)
+    purpleLayer.transform = purpleTransform
+    transformLayer.addSublayer(purpleLayer)
+    
+    transformLayer.anchorPointZ = sideLength / 2.0
+    viewForTransformLayer.layer.addSublayer(transformLayer)
+    
+    
   }
 
   func setUpSwipeMeTextLayer() {
@@ -111,6 +145,8 @@ extension CATransformLayerViewController {
 }
 
 // MARK: - Touch Handling
+
+//this transform based on user gestures
 extension CATransformLayerViewController {
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     if let location = touches.first?.location(in: viewForTransformLayer) {
